@@ -13,7 +13,7 @@
     "activationEvents": [
         "onCommand:carbon.show"
     ],
-    "main": "./out/extension",
+    "main": "./out/carbon",
     "contributes": {
         "commands": [
             {
