@@ -20,7 +20,101 @@
                 "command": "carbon.show",
                 "title": "Carbon"
             }
-        ]
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Carbon configuration",
+            "properties": {
+                "carbon.autoAdjustWidth": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Automatically adjust the width of the window."
+                },
+                "carbon.backgroundColor": {
+                    "type": "string",
+                    "default": "rgba(0,0,0,0)",
+                    "description": "RGB color to use as the background behind the window.",
+                    "pattern": "^rgba\\((([01]?\\d\\d?|2[0-4]\\d|25[0-5]),\\s*){3}([01]|(0?\\.\\d+))\\)$"
+                },
+                "carbon.dropShadow": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Render a drop shadow on the window."
+                },
+                "carbon.fontFamily": {
+                    "type": "string",
+                    "default": "Hack",
+                    "description": "The font family to use.",
+                    "enum": [
+                        "Anonymous Pro",
+                        "Droid Sans Mono",
+                        "Fira Code",
+                        "Hack",
+                        "Inconsolata",
+                        "Source Code Pro",
+                        "Ubuntu Mono"
+                    ]
+                },
+                "carbon.fontSize": {
+                    "type": "integer",
+                    "default": 13,
+                    "description": "The font size.",
+                    "minimum": 10,
+                    "maximum": 18
+                },
+                "carbon.lineNumbers": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Show line numbers."
+                },
+                "carbon.paddingHorizontal": {
+                    "type": "integer",
+                    "default": 32,
+                    "description": "The amount of horizontal padding applied to the window."
+                },
+                "carbon.paddingVertical": {
+                    "type": "integer",
+                    "default": 48,
+                    "description": "The amount of vertical padding applied to the window."
+                },
+                "carbon.theme": {
+                    "type": "string",
+                    "default": "seti",
+                    "description": "Pick the theme to use.",
+                    "enum": [
+                        "3024-night",
+                        "blackboard",
+                        "base16-dark",
+                        "base16-light",
+                        "cobalt",
+                        "dracula",
+                        "duotone-dark",
+                        "hopscotch",
+                        "material",
+                        "monokai",
+                        "oceanic-next",
+                        "panda-syntax",
+                        "paraiso-dark",
+                        "seti",
+                        "solarized dark",
+                        "solarized light",
+                        "twilight",
+                        "yeti",
+                        "zenburn"
+                    ]
+                },
+                "carbon.url": {
+                    "type": "string",
+                    "default": "https://carbon.now.sh",
+                    "description": "Change the root url (useful for development)."
+                },
+                "carbon.windowControls": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Show window controls."
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
