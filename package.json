@@ -130,6 +130,6 @@
         "vscode": "^1.1.6"
     },
     "dependencies": {
-        "openurl": "^1.1.1"
+        "openurl2": "^1.0.1"
     }
 }

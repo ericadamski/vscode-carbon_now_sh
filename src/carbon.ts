@@ -1,7 +1,7 @@
 'use strict';
 
 import { ExtensionContext, commands, window, TextDocument, Uri, workspace } from 'vscode';
-import { open } from 'openurl';
+import { open } from 'openurl2';
 import { URL } from 'url';
 
 function getLanguage(languageId: string) {
