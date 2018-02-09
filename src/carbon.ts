@@ -1,6 +1,6 @@
 'use strict';
 
-import { ExtensionContext, commands, window, TextDocument, Uri, workspace } from 'vscode';
+import { Range, ExtensionContext, commands, window, TextDocument, Uri, workspace } from 'vscode';
 import { open } from 'openurl2';
 import { URL } from 'url';
 
@@ -38,6 +38,7 @@ export function activate(context: ExtensionContext) {
         const language = getLanguage(editor.document.languageId);
 
         const url = new URL(settings.get('url'));
+
         url.searchParams.set('bg', settings.get('backgroundColor'));
         url.searchParams.set('t', settings.get('theme'));
         url.searchParams.set('l', language);
@@ -49,7 +50,10 @@ export function activate(context: ExtensionContext) {
         url.searchParams.set('ln', settings.get('lineNumbers'));
         url.searchParams.set('f', settings.get('fontFamily'));
         url.searchParams.set('fs', `${settings.get('fontSize')}px`);
-        url.searchParams.set('code', editor.document.getText());
+        
+        const { start, end, active } = editor.selection;
+        
+        url.searchParams.set('code', (start.isEqual(end) ? editor.document.lineAt(active.line).text : editor.document.getText(new Range(start, end))).trim());
 
         open(url);
     });
