@@ -1,6 +1,14 @@
 'use strict';
 
-import { Range, ExtensionContext, commands, window, TextDocument, Uri, workspace } from 'vscode';
+import {
+    Range,
+    ExtensionContext,
+    commands,
+    window,
+    TextDocument,
+    Uri,
+    workspace,
+} from 'vscode';
 import { open } from 'openurl2';
 import { URL } from 'url';
 
@@ -18,7 +26,7 @@ function getLanguage(languageId: string) {
         ['objective-c', 'text/x-objectivec'],
         ['php', 'text/x-php'],
         ['plaintext', 'text'],
-        ['shellscript', 'application/x-sh']
+        ['shellscript', 'application/x-sh'],
     ]);
 
     if (languageMap.has(languageId)) {
@@ -34,8 +42,9 @@ export function activate(context: ExtensionContext) {
 
         if (!editor) return window.showErrorMessage('😱 Feed me code!');
 
+        const { languageId, lineAt, getText } = editor.document;
         const settings = workspace.getConfiguration('carbon');
-        const language = getLanguage(editor.document.languageId);
+        const language = getLanguage(languageId);
 
         const url = new URL(settings.get('url'));
 
@@ -50,16 +59,33 @@ export function activate(context: ExtensionContext) {
         url.searchParams.set('ln', settings.get('lineNumbers'));
         url.searchParams.set('f', settings.get('fontFamily'));
         url.searchParams.set('fs', `${settings.get('fontSize')}px`);
-        
-        const { start, end, active } = editor.selection;
-        
-        url.searchParams.set('code', (start.isEqual(end) ? editor.document.lineAt(active.line).text : editor.document.getText(new Range(start, end))).trim());
 
-        open(url);
+        const { start, end, active } = editor.selection;
+
+        const selection = (start.isEqual(end)
+            ? lineAt(active.line).text
+            : getText(new Range(start, end))
+        ).trim();
+
+        const maxCharacterLength = 1000;
+        if (selection.length > maxCharacterLength)
+            return window.showErrorMessage(
+                `Selected code is longer than ${maxCharacterLength} characters, refusing to send to carbon.`
+            );
+
+        url.searchParams.set('code', selection);
+
+        open(
+            url,
+            err =>
+                err &&
+                window.showErrorMessage(
+                    'There was an issue sending code to carbon. Please try again.'
+                )
+        );
     });
 
     context.subscriptions.push(disposable);
 }
 
-export function deactivate() {
-}
+export function deactivate() {}
