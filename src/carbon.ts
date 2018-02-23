@@ -9,7 +9,7 @@ import {
   Uri,
   workspace
 } from "vscode";
-import { open } from "openurl2";
+import { open } from "opn-url";
 import { URL } from "url";
 
 function getLanguage(languageId: string) {
