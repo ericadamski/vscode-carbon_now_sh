@@ -73,7 +73,7 @@ export function activate(context: ExtensionContext) {
         `Selected code is longer than ${maxCharacterLength} characters, refusing to send to carbon.`
       );
 
-    url.searchParams.set("code", selection);
+    url.searchParams.set("code", encodeURIComponent(selection));
 
     open(
       url.toString(),
