@@ -38,8 +38,8 @@
                 },
                 "carbon.backgroundColor": {
                     "type": "string",
-                    "default": "rgba(0,0,0,0)",
-                    "description": "RGB color to use as the background behind the window.",
+                    "default": "rgba(171,184,195,100)",
+                    "description": "RGBA color to use as the background behind the window.",
                     "pattern": "^rgba\\((([01]?\\d\\d?|2[0-4]\\d|25[0-5]),\\s*){3}([01]|(0?\\.\\d+))\\)$"
                 },
                 "carbon.dropShadow": {
@@ -52,10 +52,15 @@
                     "default": "Hack",
                     "description": "The font family to use.",
                     "enum": [
+                        "dm",
                         "Anonymous Pro",
                         "Droid Sans Mono",
+                        "Fantasque Sans Mono",
                         "Fira Code",
+                        "Monoid",
                         "Hack",
+                        "IBM Plex Mono",
+                        "Iosevka",
                         "Inconsolata",
                         "Source Code Pro",
                         "Ubuntu Mono"
@@ -64,7 +69,7 @@
                 "carbon.fontSize": {
                     "type": "integer",
                     "default": 13,
-                    "description": "The font size.",
+                    "description": "The font size. Min: 10, Max: 18",
                     "minimum": 10,
                     "maximum": 18
                 },
@@ -76,12 +81,16 @@
                 "carbon.paddingHorizontal": {
                     "type": "integer",
                     "default": 32,
-                    "description": "The amount of horizontal padding applied to the window."
+                    "description": "The amount of horizontal padding applied to the window.  Min: 0, Max: 100",
+                    "minimum": 0,
+                    "maximum": 100
                 },
                 "carbon.paddingVertical": {
                     "type": "integer",
                     "default": 48,
-                    "description": "The amount of vertical padding applied to the window."
+                    "description": "The amount of vertical padding applied to the window. Min: 0, Max: 200",
+                    "minimum": 0,
+                    "maximum": 200
                 },
                 "carbon.theme": {
                     "type": "string",
@@ -98,13 +107,18 @@
                         "hopscotch",
                         "material",
                         "monokai",
+                        "night-owl",
                         "oceanic-next",
+                        "one-dark",
                         "panda-syntax",
                         "paraiso-dark",
                         "seti",
                         "solarized dark",
                         "solarized light",
+                        "tomorrow-night-bright",
+                        "lucario",
                         "twilight",
+                        "verminal",
                         "yeti",
                         "zenburn"
                     ]
@@ -118,6 +132,47 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Show window controls."
+                },
+                "carbon.useBrowserCache": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Use your browsers already configured Carbon settings."
+                },
+                "carbon.windowTheme": {
+                    "type": "string",
+                    "default": "none",
+                    "description": "The window theme to use. Options: none, sharp, bw ",
+                    "enum": [
+                        "none",
+                        "sharp",
+                        "bw"
+                    ]
+                },
+                "carbon.lineHeight": {
+                    "type": "integer",
+                    "default": 133,
+                    "description": "The line height to use. Min: 90, Max: 250",
+                    "minimum": 90,
+                    "maximum": 250
+                },
+                "carbon.dropShadowOffset": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "The drop shadow offset. Min: 0, Max: 100",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "carbon.dropShadowBlurRadius": {
+                    "type": "integer",
+                    "default": 68,
+                    "description": "The drop shadow blur radius. Min: 0, Max: 100",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "carbon.showWatermark": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Show a watermark."
                 }
             }
         }
