@@ -31,9 +31,9 @@ function getLanguage(languageId: string) {
 
   if (languageMap.has(languageId)) {
     return languageMap.get(languageId);
+  } else {
+    return "auto";
   }
-
-  return languageId;
 }
 
 export function activate(context: ExtensionContext) {
@@ -45,20 +45,6 @@ export function activate(context: ExtensionContext) {
     const { languageId, lineAt, getText } = editor.document;
     const settings = workspace.getConfiguration("carbon");
     const language = getLanguage(languageId);
-
-    const url = new URL(settings.get("url"));
-
-    url.searchParams.set("bg", settings.get("backgroundColor"));
-    url.searchParams.set("t", settings.get("theme"));
-    url.searchParams.set("l", language);
-    url.searchParams.set("ds", settings.get("dropShadow"));
-    url.searchParams.set("wc", settings.get("windowControls"));
-    url.searchParams.set("wa", settings.get("autoAdjustWidth"));
-    url.searchParams.set("pv", `${settings.get("paddingVertical")}px`);
-    url.searchParams.set("ph", `${settings.get("paddingHorizontal")}px`);
-    url.searchParams.set("ln", settings.get("lineNumbers"));
-    url.searchParams.set("f", settings.get("fontFamily"));
-    url.searchParams.set("fs", `${settings.get("fontSize")}px`);
 
     const { start, end, active } = editor.selection;
 
@@ -73,6 +59,46 @@ export function activate(context: ExtensionContext) {
         `Selected code is longer than ${maxCharacterLength} characters, refusing to send to carbon.`
       );
 
+    const url = new URL(settings.get("url"));
+
+    if (settings.get("useBrowserCache")) {
+      url.searchParams.set("code", encodeURIComponent(selection));
+      open(
+        url.toString(),
+        err =>
+          err &&
+          (() => {
+            window.showErrorMessage(
+              `There was an issue sending code to carbon. Please try again.`
+            );
+  
+            console.error(`
+              URL: ${url}
+              Code: ${selection}
+              Error: ${err}
+            `);
+          })()
+      );
+      context.subscriptions.push(disposable);
+      return;
+    }
+
+    url.searchParams.set("bg", settings.get("backgroundColor"));
+    url.searchParams.set("t", settings.get("theme"));
+    url.searchParams.set("wt", settings.get("windowTheme"));
+    url.searchParams.set("l", language);
+    url.searchParams.set("ds", settings.get("dropShadow"));
+    url.searchParams.set("dsyoff", `${settings.get("dropShadowOffset")}px`);
+    url.searchParams.set("dsblur", `${settings.get("dropShadowBlurRadius")}px`);
+    url.searchParams.set("wc", settings.get("windowControls"));
+    url.searchParams.set("wa", settings.get("autoAdjustWidth"));
+    url.searchParams.set("pv", `${settings.get("paddingVertical")}px`);
+    url.searchParams.set("ph", `${settings.get("paddingHorizontal")}px`);
+    url.searchParams.set("ln", settings.get("lineNumbers"));
+    url.searchParams.set("f", settings.get("fontFamily"));
+    url.searchParams.set("fs", `${settings.get("fontSize")}px`);
+    url.searchParams.set("lh", `${settings.get("lineHeight")}%`);
+    url.searchParams.set("wm", settings.get("showWatermark"))
     url.searchParams.set("code", encodeURIComponent(selection));
 
     open(
