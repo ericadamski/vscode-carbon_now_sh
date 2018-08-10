@@ -173,6 +173,21 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Show a watermark."
+                },
+                "carbon.timestamp": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Timestamp file name."
+                },
+                "carbon.exportSize": {
+                    "type": "string",
+                    "default": "2x",
+                    "description": "Export size.",
+                    "enum": [
+                        "1x",
+                        "2x",
+                        "4x"
+                    ]
                 }
             }
         }
@@ -188,7 +203,7 @@
         "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
         "typescript": "^2.6.1",
-        "vscode": "^1.1.17"
+        "vscode": "^1.1.18"
     },
     "dependencies": {
         "opn-url": "^1.0.0"
