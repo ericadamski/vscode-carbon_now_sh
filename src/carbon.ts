@@ -98,7 +98,7 @@ export function activate(context: ExtensionContext) {
     url.searchParams.set("f", settings.get("fontFamily"));
     url.searchParams.set("fs", `${settings.get("fontSize")}px`);
     url.searchParams.set("lh", `${settings.get("lineHeight")}%`);
-    url.searchParams.set("wm", settings.get("showWatermark"))
+    url.searchParams.set("wm", settings.get("showWatermark"));
     url.searchParams.set("code", encodeURIComponent(selection));
 
     open(
