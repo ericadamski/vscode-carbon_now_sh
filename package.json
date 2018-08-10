@@ -173,6 +173,21 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Show a watermark."
+                },
+                "carbon.timestamp": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Timestamp file name."
+                },
+                "carbon.exportSize": {
+                    "type": "string",
+                    "default": "2x",
+                    "description": "Export size.",
+                    "enum": [
+                        "1x",
+                        "2x",
+                        "4x"
+                    ]
                 }
             }
         }
