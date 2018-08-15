@@ -57,12 +57,13 @@
                         "Droid Sans Mono",
                         "Fantasque Sans Mono",
                         "Fira Code",
-                        "Monoid",
                         "Hack",
                         "IBM Plex Mono",
-                        "Iosevka",
                         "Inconsolata",
+                        "Iosevka",
+                        "Monoid",
                         "Source Code Pro",
+                        "Space Mono",
                         "Ubuntu Mono"
                     ]
                 },
