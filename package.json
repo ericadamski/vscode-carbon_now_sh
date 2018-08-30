@@ -2,7 +2,7 @@
     "name": "carbon-now-sh",
     "displayName": "carbon-now-sh",
     "description": "A Code package to open the current editor content in carbon.now.sh",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "publisher": "ericadamski",
     "engines": {
         "vscode": "^1.18.0"
@@ -21,6 +21,14 @@
                 "title": "Carbon"
             }
         ],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "editorHasSelection",
+                    "command": "carbon.show"
+                }
+            ]
+        },
         "keybindings": [
             {
                 "key": "alt+cmd+a",
