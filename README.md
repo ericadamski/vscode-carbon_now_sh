@@ -1,3 +1,6 @@
+[![Marketplace Version](https://vsmarketplacebadge.apphb.com/version/ericadamski.carbon-now-sh.svg)](https://marketplace.visualstudio.com/items?itemName=ericadamski.carbon-now-sh)
+[![Installs](https://vsmarketplacebadge.apphb.com/installs/ericadamski.carbon-now-sh.svg)](https://marketplace.visualstudio.com/items?itemName=ericadamski.carbon-now-sh)
+
 # carbon-now-sh
 
 A VS Code extension to open the current editor content in [carbon.now.sh](https://carbon.now.sh).
