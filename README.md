@@ -7,6 +7,8 @@ A VS Code extension to open the current editor content in [carbon.now.sh](https:
 
 Simply highlight the code you want to capture, and run the Carbon extension. You'll be redirected to [carbon.now.sh](https://carbon.now.sh) with your selected code populating the textarea. 
 
+![vscode-carbon now sh](https://user-images.githubusercontent.com/6516758/46617867-df765680-caeb-11e8-8899-95778cdcceb7.gif)
+
 ## Running the Extension
 There are three ways to run the carbon-now-sh extension. 
 
