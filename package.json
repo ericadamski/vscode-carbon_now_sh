@@ -2,7 +2,7 @@
     "name": "carbon-now-sh",
     "displayName": "carbon-now-sh",
     "description": "A Code package to open the current editor content in carbon.now.sh",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "publisher": "ericadamski",
     "engines": {
         "vscode": "^1.18.0"
@@ -124,6 +124,7 @@
                         "seti",
                         "solarized dark",
                         "solarized light",
+                        "synthwave-84",
                         "tomorrow-night-bright",
                         "lucario",
                         "twilight",
