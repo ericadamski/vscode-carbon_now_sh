@@ -5,3 +5,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 - Initial release
+
+## [1.2.3 - 05.01.2021]
+
+- any extension host can now open the browser

@@ -5,11 +5,10 @@ import {
   ExtensionContext,
   commands,
   window,
-  TextDocument,
+  workspace,
+  env,
   Uri,
-  workspace
 } from "vscode";
-import { open } from "opn-url";
 import { URL } from "url";
 
 function getLanguage(languageId: string) {
@@ -75,7 +74,7 @@ function getLanguage(languageId: string) {
     ["vhdl", "vhdl"],
     ["vue", "vue"],
     ["xml", "xml"],
-    ["yaml", "yaml"]
+    ["yaml", "yaml"],
   ]);
 
   if (languageMap.has(languageId)) {
@@ -112,65 +111,43 @@ export function activate(context: ExtensionContext) {
 
     if (settings.get("useBrowserCache")) {
       url.searchParams.set("code", encodeURIComponent(selection));
-      open(
-        url.toString(),
-        err =>
-          err &&
-          (() => {
-            window.showErrorMessage(
-              `There was an issue sending code to carbon. Please try again.`
-            );
-  
-            console.error(`
-              URL: ${url}
-              Code: ${selection}
-              Error: ${err}
-            `);
-          })()
-      );
       context.subscriptions.push(disposable);
-      return;
+    } else {
+      url.searchParams.set("bg", settings.get("backgroundColor"));
+      url.searchParams.set("t", settings.get("theme"));
+      url.searchParams.set("wt", settings.get("windowTheme"));
+      url.searchParams.set("l", language);
+      url.searchParams.set("ds", settings.get("dropShadow"));
+      url.searchParams.set("dsyoff", `${settings.get("dropShadowOffset")}px`);
+      url.searchParams.set(
+        "dsblur",
+        `${settings.get("dropShadowBlurRadius")}px`
+      );
+      url.searchParams.set("wc", settings.get("windowControls"));
+      url.searchParams.set("wa", settings.get("autoAdjustWidth"));
+      url.searchParams.set("pv", `${settings.get("paddingVertical")}px`);
+      url.searchParams.set("ph", `${settings.get("paddingHorizontal")}px`);
+      url.searchParams.set("ln", settings.get("lineNumbers"));
+      url.searchParams.set("f", settings.get("fontFamily"));
+      url.searchParams.set("fs", `${settings.get("fontSize")}px`);
+      url.searchParams.set("lh", `${settings.get("lineHeight")}%`);
+      url.searchParams.set("wm", settings.get("showWatermark"));
+      url.searchParams.set("ts", settings.get("timestamp"));
+      url.searchParams.set("es", settings.get("exportSize"));
+      url.searchParams.set("code", encodeURIComponent(selection));
     }
 
-    url.searchParams.set("bg", settings.get("backgroundColor"));
-    url.searchParams.set("t", settings.get("theme"));
-    url.searchParams.set("wt", settings.get("windowTheme"));
-    url.searchParams.set("l", language);
-    url.searchParams.set("ds", settings.get("dropShadow"));
-    url.searchParams.set("dsyoff", `${settings.get("dropShadowOffset")}px`);
-    url.searchParams.set("dsblur", `${settings.get("dropShadowBlurRadius")}px`);
-    url.searchParams.set("wc", settings.get("windowControls"));
-    url.searchParams.set("wa", settings.get("autoAdjustWidth"));
-    url.searchParams.set("pv", `${settings.get("paddingVertical")}px`);
-    url.searchParams.set("ph", `${settings.get("paddingHorizontal")}px`);
-    url.searchParams.set("ln", settings.get("lineNumbers"));
-    url.searchParams.set("f", settings.get("fontFamily"));
-    url.searchParams.set("fs", `${settings.get("fontSize")}px`);
-    url.searchParams.set("lh", `${settings.get("lineHeight")}%`);
-    url.searchParams.set("wm", settings.get("showWatermark"));
-    url.searchParams.set("ts", settings.get("timestamp"));
-    url.searchParams.set("es", settings.get("exportSize"));
-    url.searchParams.set("code", encodeURIComponent(selection));
-
-    open(
-      url.toString(),
-      err =>
-        err &&
-        (() => {
-          window.showErrorMessage(
-            `There was an issue sending code to carbon. Please try again.`
-          );
-
-          console.error(`
-            URL: ${url}
-            Code: ${selection}
-            Error: ${err}
-          `);
-        })()
-    );
+    open(Uri.parse(url.toString())).catch((err) => {
+      window.showErrorMessage("Failed to open browser", err);
+      console.error("Failed to open browser", err);
+    });
   });
 
   context.subscriptions.push(disposable);
 }
+
+const open = async (uri: Uri) => {
+  return await env.openExternal(uri);
+};
 
 export function deactivate() {}

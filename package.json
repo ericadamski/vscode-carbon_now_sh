@@ -2,7 +2,7 @@
     "name": "carbon-now-sh",
     "displayName": "carbon-now-sh",
     "description": "A Code package to open the current editor content in carbon.now.sh",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "publisher": "ericadamski",
     "engines": {
         "vscode": "^1.18.0"
@@ -204,17 +204,13 @@
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+        "watch": "tsc -watch -p ./"
     },
     "devDependencies": {
         "@types/mocha": "^5.2.5",
-        "@types/node": "^10.12.6",
-        "typescript": "^3.1.6",
-        "vscode": "^1.1.21"
-    },
-    "dependencies": {
-        "opn-url": "^1.0.1"
+        "@types/node": "^10.17.50",
+        "@types/vscode": "^1.52.0",
+        "typescript": "^3.9.7",
+        "vscode-test": "^1.4.1"
     }
 }
