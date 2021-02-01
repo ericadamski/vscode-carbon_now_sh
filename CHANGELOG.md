@@ -9,3 +9,4 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [1.2.3 - 05.01.2021]
 
 - any extension host can now open the browser
+- SynthWave '84 theme support
