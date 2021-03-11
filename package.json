@@ -46,7 +46,7 @@
                 },
                 "carbon.backgroundColor": {
                     "type": "string",
-                    "default": "rgba(171,184,195,100)",
+                    "default": "rgba(171,184,195,1)",
                     "description": "RGBA color to use as the background behind the window.",
                     "pattern": "^rgba\\((([01]?\\d\\d?|2[0-4]\\d|25[0-5]),\\s*){3}([01]|(0?\\.\\d+))\\)$"
                 },
