@@ -40,6 +40,7 @@ function getLanguage(languageId: string) {
     ["javascript", "javascript"],
     ["json", "application/json"],
     ["javascriptreact", "jsx"],
+    ["typescriptreact", "text/typescript-jsx"],
     ["julia", "julia"],
     ["kotlin", "text/x-kotlin"],
     ["latex", "stex"],
